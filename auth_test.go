@@ -17,7 +17,7 @@ func TestGetAPIKey(t *testing.T) {
 		{
 			name:     "Happy path",
 			input:    []string{"Authorization", "ApiKey abc123"},
-			expected: "abc123",
+			expected: "abc123fake",
 		},
 	}
 
