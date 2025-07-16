@@ -37,7 +37,7 @@ jobs:
       - name: Check code Formatting
         run: test -z $(go fmt ./...)
 
-      - name: Linting
+      - name: staticcheck
         uses: dominikh/staticcheck-action@v1
         with:
           version: "latest"
