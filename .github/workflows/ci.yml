@@ -46,5 +46,5 @@ jobs:
         run: go install github.com/securego/gosec/v2/cmd/gosec@latest
 
       - name: Run gosec
-        run: text -z %(gosec ./...)
+        run: gosec ./...
     
