@@ -38,7 +38,7 @@ jobs:
         run: test -z $(go fmt ./...)
 
   security:
-    name: Security
+    name: gosec
     runs-on: ubuntu-latest
 
     steps:
