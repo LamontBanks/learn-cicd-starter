@@ -6,7 +6,7 @@ on:
 
 jobs:
   Deploy:
-    name: Deploy
+    name: gcloud builds submit
     runs-on: ubuntu-latest
 
     steps:
