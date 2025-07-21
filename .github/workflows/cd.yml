@@ -9,6 +9,9 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
 
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -35,6 +38,14 @@ jobs:
 
       - name: gcloud builds submit
         run: gcloud builds submit --tag us-central1-docker.pkg.dev/notely-466221/notely-ar-repo/lbdev332/notely:latest
+
+      # Update database
+      # Runs after successfully building the code, but before deploy the container
+      - name: 'Install Goose'
+        run: go install github.com/pressly/goose/v3/cmd/goose@latest
+
+      - name: db migrations
+        run: ./scripts/migrateup.sh
 
       - name: Deploy to Cloud Run
         run: gcloud run deploy notely --image us-central1-docker.pkg.dev/notely-466221/notely-ar-repo/lbdev332/notely:latest --region us-central1 --allow-unauthenticated --project notely-466221 --max-instances=4
